@@ -1,5 +1,5 @@
 from collections import namedtuple
-from sqlalchemy import or_, and_, func
+from sqlalchemy import or_, and_, func, desc
 import ckan.model as model
 import ckan.plugins as p
 import ckan.lib.dictization.model_dictize as model_dictize
