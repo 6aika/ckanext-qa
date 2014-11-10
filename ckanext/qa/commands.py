@@ -80,8 +80,7 @@ class QACommand(p.toolkit.CkanCommand):
                 data = json.dumps(package)
                 task_id = make_uuid()
                 tasks.update_package.apply_async(args=[context, data],
-                                                 task_id=task_id,
-                                                 queue=self.options.queue)
+                                                 task_id=task_id)
 
         elif cmd == 'clean':
             self.log.error('Command "%s" not implemented' % (cmd,))
@@ -117,13 +116,9 @@ class QACommand(p.toolkit.CkanCommand):
                 if response.status_code == 200:
                     package_tuples = json.loads(response.text).get('result')
                     package_names = [pt[0] for pt in package_tuples]
-                    if not self.options.queue:
-                        self.options.queue = 'bulk'
                 else:
                     # must be a package id
                     package_names = [id]
-                    if not self.options.queue:
-                        self.options.queue = 'priority'
                 for package_name in sorted(package_names):
                     data = json.dumps({'id': unicode(package_name)})
                     url = api_url + '/package_show'
@@ -140,8 +135,6 @@ class QACommand(p.toolkit.CkanCommand):
                         raise CkanApiError(err)
                     yield json.loads(response.content).get('result')
         else:
-            if not self.options.queue:
-                self.options.queue = 'bulk'
             page, limit = 1, 10
             while True:
                 url = api_url + '/current_package_list_with_resources'
