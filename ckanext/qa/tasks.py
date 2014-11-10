@@ -120,9 +120,9 @@ def update_package(context, data):
         for resource in package['resources']:
             resource['is_open'] = package['isopen']
             resource['package'] = package['name']
-            result = resource_score(context, resource, log)
+            result = resource_score(context, resource)
             log.info('Res score: %s format:%s broken:%s url:"%s"', result.get('openness_score'), result.get('format'), result.get('is_broken'), resource['url'])
-            _update_task_status(context, _task_status_data(resource['id'], result), log)
+            _update_task_status(context, _task_status_data(resource['id'], result))
             log.info('CKAN updated with openness score')
     except Exception, e:
         log.error('Exception occurred during QA update: %s: %s', e.__class__.__name__,  unicode(e))
