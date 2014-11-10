@@ -55,51 +55,54 @@ MIME_TYPE_SCORE = {
 
 def _update_task_status(context, data):
     """
-    Use CKAN API to update the task status. The data parameter
-    should be a dict representing one row in the task_status table.
-
-    Returns the content of the response.
-    """
-    api_url = urlparse.urljoin(context['site_url'], 'api/action')
+       Use CKAN API to update the task status. The data parameter
+       should be a dict representing one row in the task_status table, or a list
+       of such dicts.
+       Returns the content of the response.
+       """
+    if isinstance(data, list):
+        func = '/task_status_update_many'
+        payload = {'data': data}
+    elif isinstance(data, dict):
+        func = '/task_status_update'
+        payload = data
+    api_url = urlparse.urljoin(context['site_url'], 'api/action') + func
     res = requests.post(
-        api_url + '/task_status_update', json.dumps(data),
+        api_url, json.dumps(payload),
         headers={'Authorization': context['apikey'],
                  'Content-Type': 'application/json'}
     )
     if res.status_code == 200:
         return res.content
     else:
+        try:
+            content = res.content
+        except:
+            content = '<could not read request content to discover error>'
+        log.error('ckan failed to update task_status, status_code (%s), error %s. Maybe the API key or site URL are wrong?.\ncontext: %r\ndata: %r\nres: %r\nres.error: %r\napi_url: %r'
+                  % (res.status_code, content, context, data, res, res.error, api_url))
         raise CkanError('ckan failed to update task_status, status_code (%s), error %s'
-                        % (res.status_code, res.content))
+                        % (res.status_code, content))
+    log.info('Task status updated ok')
 
 
-def _task_status_data(id, result):
-    return [
-        {
-            'entity_id': id,
-            'entity_type': u'resource',
-            'task_type': 'qa',
-            'key': u'openness_score',
-            'value': result['openness_score'],
-            'last_updated': datetime.datetime.now().isoformat()
-        },
-        {
-            'entity_id': id,
-            'entity_type': u'resource',
-            'task_type': 'qa',
-            'key': u'openness_score_reason',
-            'value': result['openness_score_reason'],
-            'last_updated': datetime.datetime.now().isoformat()
-        },
-        {
-            'entity_id': id,
-            'entity_type': u'resource',
-            'task_type': 'qa',
-            'key': u'openness_score_failure_count',
-            'value': result['openness_score_failure_count'],
-            'last_updated': datetime.datetime.now().isoformat()
-        },
-    ]
+def _task_status_data(resource_id, result):
+    now = datetime.datetime.now().isoformat()
+    data = {
+        'entity_id': resource_id,
+        'entity_type': u'resource',
+        'task_type': 'qa',
+        'key': u'status',
+        'value': result['openness_score'],
+        'error': json.dumps({
+            'reason': result['openness_score_reason'],
+            'format': result['format'],
+            'is_broken': result['is_broken'],
+            'archiver_status': result['archiver_status'],
+            }),
+        'last_updated': now
+    }
+    return data
 
 @celery_app.celery.task(name="qa.package")
 def update_package(context, data):
