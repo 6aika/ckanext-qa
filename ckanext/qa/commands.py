@@ -74,31 +74,14 @@ class QACommand(p.toolkit.CkanCommand):
 
         if cmd == 'update':
             for package in self._package_list():
-                self.log.info("QA on dataset being added to Celery queue: %s (%d resources)" % 
-                            (package.get('name'), len(package.get('resources', []))))
+                self.log.info('QA on dataset being added to Celery queue "%s": %s (%d resources)' % \
+                              (self.options.queue, package.get('name'),len(package.get('resources', []))))
 
-                for resource in package.get('resources', []):
-                    resource['package'] = package['name']
-                    pkg = model.Package.get(package['id'])
-                    resource['is_open'] = pkg.isopen()
-                    data = json.dumps(resource) 
-                    task_id = make_uuid()
-                    task_status = {
-                        'entity_id': resource['id'],
-                        'entity_type': u'resource',
-                        'task_type': u'qa',
-                        'key': u'celery_task_id',
-                        'value': task_id,
-                        'error': u'',
-                        'last_updated': datetime.datetime.now().isoformat()
-                    }
-                    task_context = {
-                        'model': model,
-                        'user': user.get('name')
-                    }
-
-                    p.toolkit.get_action('task_status_update')(task_context, task_status)
-                    tasks.update.apply_async(args=[context, data], task_id=task_id)
+                data = json.dumps(package)
+                task_id = make_uuid()
+                tasks.update_package.apply_async(args=[context, data],
+                                                 task_id=task_id,
+                                                 queue=self.options.queue)
 
         elif cmd == 'clean':
             self.log.error('Command "%s" not implemented' % (cmd,))
@@ -124,37 +107,57 @@ class QACommand(p.toolkit.CkanCommand):
         api_url = urlparse.urljoin(self.site_url, 'api/action')
         if len(self.args) > 1:
             for id in self.args[1:]:
-                data = {'id': unicode(id)}
-                url = api_url + '/package_show'
-                response = self.make_post(url, data)
-                if not response.ok:
-                    err = ('Failed to get package %s from url %r: %s' %
-                           (id, url, response.error))
-                    self.log.error(err)
-                    raise CkanApiError(err)
-                yield json.loads(response.content).get('result')
+                # try arg as a group name
+                url = api_url + '/member_list'
+                self.log.info('Trying as a group "%s" at URL: %r', id, url)
+                data = {'id': id,
+                        'object_type': 'package',
+                        'capacity': 'public'}
+                response = requests.post(url, data=json.dumps(data), headers=REQUESTS_HEADER)
+                if response.status_code == 200:
+                    package_tuples = json.loads(response.text).get('result')
+                    package_names = [pt[0] for pt in package_tuples]
+                    if not self.options.queue:
+                        self.options.queue = 'bulk'
+                else:
+                    # must be a package id
+                    package_names = [id]
+                    if not self.options.queue:
+                        self.options.queue = 'priority'
+                for package_name in sorted(package_names):
+                    data = json.dumps({'id': unicode(package_name)})
+                    url = api_url + '/package_show'
+                    response = requests.post(url, data, headers=REQUESTS_HEADER)
+                    if response.status_code == 403:
+                        self.log.warning('Package "%s" is in the group but '
+                                         'returned %i error, so skipping.' % \
+                                         (package_name, response.status_code))
+                        continue
+                    if not response.ok:
+                        err = ('Failed to get package %s from url %r: %s %s' %
+                               (package_name, url, response.status_code, response.error))
+                        self.log.error(err)
+                        raise CkanApiError(err)
+                    yield json.loads(response.content).get('result')
         else:
-            page, limit = 1, 100
-            url = api_url + '/current_package_list_with_resources'
-            response = self.make_post(url, {'page': page, 'limit': limit})
-            if not response.ok:
-                err = ('Failed to get package list with resources from url %r: %s' %
-                       (url, response.error))
-                self.log.error(err)
-                raise CkanApiError(err)
-            chunk = json.loads(response.content).get('result')
-            while(chunk):
-                page += 1
-                for p in chunk:
-                    yield p
+            if not self.options.queue:
+                self.options.queue = 'bulk'
+            page, limit = 1, 10
+            while True:
                 url = api_url + '/current_package_list_with_resources'
-                response = self.make_post(url, {'page': page, 'limit': limit})
-
-                try:
-                    response.raise_for_status()
-                except requests.exceptions.RequestException, e:
-                    err = ('Failed to get package list with resources from url %r: %s' %
-                       (url, str(e)))
+                response = requests.post(url,
+                                         json.dumps({'page': page,
+                                                     'limit': limit,
+                                                     'order_by': 'name'}),
+                                         headers=REQUESTS_HEADER)
+                if not response.ok:
+                    err = ('Failed to get package list with resources from url %r: %s %s' %
+                           (url, response.status_code, response.error))
                     self.log.error(err)
                     raise CkanApiError(err)
                 chunk = json.loads(response.content).get('result')
+                if not chunk:
+                    break
+                for package in chunk:
+                    yield package
+                page += 1
