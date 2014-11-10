@@ -112,7 +112,6 @@ def update_package(context, data):
     data - package dict (includes its resources)
     Returns None
     """
-    log = update_package.get_logger()
     try:
         package = json.loads(data)
         context = json.loads(context)
