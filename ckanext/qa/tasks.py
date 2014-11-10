@@ -101,6 +101,34 @@ def _task_status_data(id, result):
         },
     ]
 
+@celery_app.celery.task(name="qa.package")
+def update_package(context, data):
+    """
+    Given a package, calculates an openness score for each of its resources.
+    It is more efficient to call this than 'update' for each resource.
+    context - how this plugin can call the CKAN API to get more info and
+              save the results.
+              is a JSON dict with keys: 'site_url', 'apikey'
+    data - package dict (includes its resources)
+    Returns None
+    """
+    log = update_package.get_logger()
+    try:
+        package = json.loads(data)
+        context = json.loads(context)
+
+        log.info('Openness scoring package %s (%i resources)', package['name'], len(package['resources']))
+        for resource in package['resources']:
+            resource['is_open'] = package['isopen']
+            resource['package'] = package['name']
+            result = resource_score(context, resource, log)
+            log.info('Res score: %s format:%s broken:%s url:"%s"', result.get('openness_score'), result.get('format'), result.get('is_broken'), resource['url'])
+            _update_task_status(context, _task_status_data(resource['id'], result), log)
+            log.info('CKAN updated with openness score')
+        update_search_index(context, package['id'], log)
+    except Exception, e:
+        log.error('Exception occurred during QA update: %s: %s', e.__class__.__name__,  unicode(e))
+        raise
 
 @celery_app.celery.task(name="qa.update")
 def update(context, data):
@@ -239,3 +267,28 @@ def resource_score(context, data):
         'openness_score_reason': score_reason,
         'openness_score_failure_count': score_failure_count,
     }
+
+def update_search_index(context, package_id, log):
+    '''
+    Tells CKAN to update its search index for a given package dict.
+    '''
+    log.info('Updating Search Index..')
+    api_url = urlparse.urljoin(context['site_url'], 'api/action') + '/search_index_update'
+    data = {'id': package_id}
+    res = requests.post(
+        api_url, json.dumps(data),
+        headers={'Authorization': context['apikey'],
+                 'Content-Type': 'application/json'}
+    )
+    if res.status_code == 200:
+        log.info('..Search Index updated')
+        return res.content
+    else:
+        try:
+            content = res.content
+        except:
+            content = '<could not read request content to discover error>'
+        log.error('ckan failed to update search index, status_code (%s), error %s. Maybe the API key or site URL are wrong?.\ncontext: %r\ndata: %r\nres: %r\nres.error: %r\napi_url: %r'
+                  % (res.status_code, content, context, data, res, res.error, api_url))
+        raise CkanError('ckan failed to update search index, status_code (%s), error %s'
+                        % (res.status_code, content))
