@@ -3,8 +3,38 @@ from sqlalchemy import or_, and_, func
 import ckan.model as model
 import ckan.plugins as p
 import ckan.lib.dictization.model_dictize as model_dictize
+import json
+import logging
+
+log = logging.getLogger(__name__)
 
 resource_dictize = model_dictize.resource_dictize
+
+def convert_sqlalchemy_result_to_DictObj(result):
+    return DictObj(zip(result.keys(), result))
+
+class DictObj(dict):
+    """\
+    Like a normal Python dictionary, but allows keys to be accessed as
+    attributes. For example:
+    ::
+        >>> person = DictObj(firstname='James')
+        >>> person.firstname
+        'James'
+        >>> person['surname'] = 'Jones'
+        >>> person.surname
+        'Jones'
+    """
+    def __getattr__(self, name):
+        try:
+            return self[name]
+        except KeyError:
+            raise AttributeError('No such attribute %r'%name)
+
+    def __setattr__(self, name, value):
+        raise AttributeError(
+            'You cannot set attributes of this DictObject directly'
+        )
 
 
 def five_stars(id=None):
@@ -44,6 +74,69 @@ def five_stars(id=None):
 
     return results
 
+# from datagovuk
+def dataset_five_stars(dataset_id):
+    '''For a dataset, return an overall five star score plus textual details of
+    why it merits that.
+    Of the resources, it returns details of the one with the highest QA score.
+    Returns a dict of {'name': <package name>,
+                       'title': <package title>,
+                       'id': <resource id>,
+                       'last_updated': <date of last update of openness score
+                                        (datetime)>,
+                       'value': <openness score (int)>,
+                       'reason': <text describing score reasoning>,
+                       'is_broken': <whether the link is broken (bool)>,
+                       'format': <the detected file format>,
+                       }
+    '''
+
+    import ckan.model as model
+    # Run a query to choose the most recent, highest qa score of all resources in this dataset.
+    query = model.Session.query(model.Package.name, model.Package.title, model.Resource.id, model.TaskStatus.last_updated.label('last_updated'), model.TaskStatus.value.label('value'), model.TaskStatus.error.label('error')) \
+        .join(model.ResourceGroup, model.Package.id == model.ResourceGroup.package_id) \
+        .join(model.Resource) \
+        .join(model.TaskStatus, model.TaskStatus.entity_id == model.Resource.id) \
+        .filter(model.TaskStatus.task_type==u'qa') \
+        .filter(model.TaskStatus.key==u'status') \
+        .filter(model.Package.id == dataset_id) \
+        .filter(model.Resource.state==u'active') \
+        .order_by(desc(model.TaskStatus.value)) \
+        .order_by(desc(model.TaskStatus.last_updated)) \
+
+    report = query.first()
+    if not report:
+        pkg = model.Package.get(dataset_id)
+        if pkg:
+            num_resources = model.Session.query(model.ResourceGroup) \
+                .join(model.Resource) \
+                .filter(model.ResourceGroup.package_id == dataset_id) \
+                .filter(model.Resource.state==u'active') \
+                .count()
+            if num_resources == 0:
+                # Package has no resources, so gets 0 stars
+                return {'name': pkg.name,
+                        'title': pkg.title,
+                        'id': None,
+                        'last_updated': None,
+                        'value': 0,
+                        'reason': 'No data resources, so scores 0.'}
+        # Package hasn't been rated yet
+        return None
+
+    # Transfer to a DictObj - I don't trust the SqlAlchemy result to
+    # exist for the remainder of the request, although it's not disappeared
+    # in practice.
+    result = convert_sqlalchemy_result_to_DictObj(report)
+    result['value'] = int(report.value)
+    try:
+        result.update(json.loads(result['error']))
+    except ValueError, e:
+        log.error('QA status "error" should have been in JSON format, but found: "%s" %s', result['error'], e)
+        result['reason'] = 'Could not display reason due to a system error'
+    del result['error']
+
+    return result
 
 def resource_five_stars(id):
     """
