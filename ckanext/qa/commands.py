@@ -74,8 +74,8 @@ class QACommand(p.toolkit.CkanCommand):
 
         if cmd == 'update':
             for package in self._package_list():
-                self.log.info('QA on dataset being added to Celery queue "%s": %s (%d resources)' % \
-                              (self.options.queue, package.get('name'),len(package.get('resources', []))))
+                self.log.info('QA on dataset being added to Celery  "%s": %s (%d resources)' % \
+                              (package.get('name'),len(package.get('resources', []))))
 
                 data = json.dumps(package)
                 task_id = make_uuid()
