@@ -18,7 +18,7 @@ class TestSniffFormat:
         cls.fixture_files = [] # (format_extension, filepath)
         fixture_data_dir = os.path.join(os.path.dirname(__file__), 'data')
         for filename in os.listdir(fixture_data_dir):
-            format_extension = '.'.join(filename.split('.')[1:])
+            format_extension = '.'.join(filename.split('.')[1:]).replace('_', ' ')
             filepath = os.path.join(fixture_data_dir, filename)
             cls.fixture_files.append((format_extension, filepath))
 
@@ -104,7 +104,11 @@ class TestSniffFormat:
     def test_csv6(self):
         self.check_format('csv', 'Inpatients_MHA_Machine_readable_dataset_1011.csv')
     def test_shp(self):
-        self.check_format('shp')
+        self.check_format('shp', 'HS2-ARP-00-GI-RW-00434_RCL_V4.shp')
+    def test_shp2(self):
+        self.check_format('shp', 'jncc_shapefile.shp')
+    def test_gtfs(self):
+        self.check_format('gtfs', 'manchester.gtfs')
     def test_html(self):
         self.check_format('html', 'index.html')
     def test_html1(self):
@@ -132,7 +136,7 @@ class TestSniffFormat:
     def test_txt_zip(self):
         self.check_format('txt.zip')
     def test_xml_zip(self):
-        self.check_format('xml.zip')
+        self.check_format('xml.zip', 'FHRS501en-GB.xml.zip')
     #def test_torrent(self):
     #    self.check_format('torrent')
     def test_psv(self):
@@ -141,6 +145,18 @@ class TestSniffFormat:
         self.check_format('wms', 'afbi_get_capabilities.wms')
     def test_wms_1_1_1(self):
         self.check_format('wms', 'oldham_get_capabilities.wms')
+    def test_wfs_1_0(self):
+        self.check_format('wfs', 'blaby_get_capabilities_1_0.wfs')
+    def test_wfs_1_1(self):
+        self.check_format('wfs', 'blaby_get_capabilities_1_1.wfs')
+    def test_wfs_2_0(self):
+        self.check_format('wfs', 'blaby_get_capabilities_2_0.wfs')
+    def test_wmts(self):
+        self.check_format('wmts', 'ukho_bathymetry.wmts')
+    def test_wcs(self):
+        self.check_format('wcs', 'ukho_bathymetry.wcs')
+    def test_wcs2(self):
+        self.check_format('wcs', 'ukho_bathymetry2.wcs')
     #def test_ics(self):
     #    self.check_format('ics')
     def test_ttl1(self):
@@ -149,6 +165,10 @@ class TestSniffFormat:
         self.check_format('ttl', 'turtle-imd-education-score-2010.ttl')
     def test_ttl3(self):
         self.check_format('ttl', 'turtle-homelessness-acceptances-per-1000.ttl')
+    def test_atom(self):
+        self.check_format('atom feed', 'os_products.atom_feed')
+    def test_atom1(self):
+        self.check_format('atom feed', 'SG_HumanHealthSafety.atom_feed')
 
 def test_is_json():
     assert is_json('5', log)
