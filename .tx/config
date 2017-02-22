@@ -2,7 +2,7 @@
 host = https://www.transifex.com
 
 [ytp.ckanext-qa]
-file_filter = i18n/<lang>/LC_MESSAGES/ckanext-qa.po
-source_file = i18n/ckanext-qa.pot
+file_filter = ckanext/qa/i18n/<lang>/LC_MESSAGES/ckanext-qa.po
+source_file = ckanext/qa/i18n/ckanext-qa.pot
 source_lang = en
 type = PO
