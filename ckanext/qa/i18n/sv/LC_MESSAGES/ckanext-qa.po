@@ -10,6 +10,7 @@ msgstr ""
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
 "POT-Creation-Date: 2017-04-13 12:18+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: Joonas Dukpa, 2018\n"
 "Language-Team: Swedish (https://www.transifex.com/6aika-dataportal/teams/68018/sv/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=utf-8\n"
@@ -21,7 +22,7 @@ msgstr ""
 #: ckanext/qa/templates/qa/openness_stars.html:23
 #: ckanext/qa/templates/snippets/organization.html:9
 msgid "Openness"
-msgstr ""
+msgstr "Öppenhet"
 
 #: ckanext/qa/templates/qa/openness_stars.html:24
 msgid "Reason"
@@ -84,7 +85,7 @@ msgstr ""
 #: ckanext/qa/templates/report/openness.html:28
 #: ckanext/qa/templates/report/openness.html:85
 msgid "Publisher"
-msgstr ""
+msgstr "Organisation"
 
 #: ckanext/qa/templates/report/openness.html:33
 #: ckanext/qa/templates/report/openness.html:56
@@ -105,7 +106,7 @@ msgstr ""
 
 #: ckanext/qa/templates/report/openness.html:82
 msgid "Dataset"
-msgstr ""
+msgstr "Dataset"
 
 #: ckanext/qa/templates/report/openness.html:83
 msgid "Notes"

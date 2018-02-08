@@ -10,7 +10,7 @@ msgstr ""
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
 "POT-Creation-Date: 2017-04-13 12:18+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
-"Last-Translator: Hami Kekkonen <hami.kekkonen@hel.fi>, 2017\n"
+"Last-Translator: Joonas Dukpa, 2018\n"
 "Language-Team: Finnish (https://www.transifex.com/6aika-dataportal/teams/68018/fi/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=utf-8\n"
@@ -48,7 +48,7 @@ msgstr "Linkitetty data - data URI:t ja muuhun dataan linkitetyt (esim. RDF)"
 
 #: ckanext/qa/templates/qa/stars_explained.html:9
 msgid "Linkable data - served at URIs (e.g. RDF)"
-msgstr ""
+msgstr "Linkitetty data - tietoaineistolla on URI (esim. JSON API)"
 
 #: ckanext/qa/templates/qa/stars_explained.html:11
 msgid "Structured data in open format (e.g. CSV)"
@@ -104,7 +104,7 @@ msgstr "Pisteiden keskiarvo"
 
 #: ckanext/qa/templates/report/openness.html:58
 msgid "Score frequencies"
-msgstr ""
+msgstr "Pistejakauma"
 
 #: ckanext/qa/templates/report/openness.html:82
 msgid "Dataset"
@@ -112,7 +112,7 @@ msgstr "Tietoaineisto"
 
 #: ckanext/qa/templates/report/openness.html:83
 msgid "Notes"
-msgstr ""
+msgstr "Huomiot"
 
 #: ckanext/qa/templates/report/openness.html:88
 msgid "Score reason"
