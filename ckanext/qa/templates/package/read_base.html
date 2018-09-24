@@ -2,7 +2,7 @@
 
 {% block package_openness %}
     {% if c.pkg_dict %}
-        <div class="module module-narrow module-shallow context-info">
+        <div class="module module-narrow module-shallow context-info hidden-xs">
             <h2 class="module-heading">{{ _('Openness') }}</h2>
             <section class="module-content">
                 {{ h.get_qa_openness(c.pkg_dict) }}<br>
