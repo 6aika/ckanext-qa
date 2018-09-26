@@ -30,11 +30,11 @@ msgstr ""
 
 #: ckanext/qa/templates/qa/openness_stars.html:27
 msgid "No openness information yet. Update expected soon."
-msgstr ""
+msgstr "Öppenhetsgraden har ännu inte definierats."
 
 #: ckanext/qa/templates/qa/openness_stars_brief.html:26
 msgid "No openness information yet"
-msgstr ""
+msgstr "Öppenhetsgraden har ännu inte definierats."
 
 #: ckanext/qa/templates/qa/stars.html:24
 msgid "0 out of 5"
