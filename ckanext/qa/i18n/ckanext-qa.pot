@@ -1,14 +1,14 @@
 # Translations template for ckanext-qa.
-# Copyright (C) 2017 ORGANIZATION
+# Copyright (C) 2018 ORGANIZATION
 # This file is distributed under the same license as the ckanext-qa project.
-# FIRST AUTHOR <EMAIL@ADDRESS>, 2017.
+# FIRST AUTHOR <EMAIL@ADDRESS>, 2018.
 #
 #, fuzzy
 msgid ""
 msgstr ""
 "Project-Id-Version: ckanext-qa 2.0\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2017-04-13 12:18+0000\n"
+"POT-Creation-Date: 2018-10-26 06:22+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -17,17 +17,143 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Generated-By: Babel 2.3.4\n"
 
-#: ckanext/qa/templates/qa/openness_stars.html:23
+#: ckanext/qa/reports.py:166
+msgid "Openness (Five Stars)"
+msgstr ""
+
+#: ckanext/qa/reports.py:167
+msgid ""
+"Datasets graded on Tim Berners Lees' Five Stars of Openness - openly "
+"licensed, openly accessible, structured, open format, URIs for entities, "
+"linked."
+msgstr ""
+
+#: ckanext/qa/tasks.py:253
+msgid "Could not understand the file format, therefore score is 1."
+msgstr ""
+
+#: ckanext/qa/tasks.py:263
+#, python-format
+msgid "Unknown error: %s"
+msgstr ""
+
+#: ckanext/qa/tasks.py:277
+msgid "License not open"
+msgstr ""
+
+#: ckanext/qa/tasks.py:302
+msgid "File could not be downloaded."
+msgstr ""
+
+#: ckanext/qa/tasks.py:303 ckanext/qa/tasks.py:378 ckanext/qa/tasks.py:383
+#: ckanext/qa/templates/qa/openness_stars_brief.html:23
+msgid "Reason"
+msgstr ""
+
+#: ckanext/qa/tasks.py:304
+#, python-format
+msgid "Error details: %s."
+msgstr ""
+
+#: ckanext/qa/tasks.py:305
+#, python-format
+msgid "Attempted on %s."
+msgstr ""
+
+#: ckanext/qa/tasks.py:309 ckanext/qa/tasks.py:317
+#, python-format
+msgid "This URL last worked on: %s."
+msgstr ""
+
+#: ckanext/qa/tasks.py:311
+msgid "This was the first attempt."
+msgstr ""
+
+#: ckanext/qa/tasks.py:313
+#, python-format
+msgid "Tried %s times since %s."
+msgstr ""
+
+#: ckanext/qa/tasks.py:319
+msgid "This URL has not worked in the history of this tool."
+msgstr ""
+
+#: ckanext/qa/tasks.py:355 ckanext/qa/tasks.py:386
+msgid "This file had not been downloaded at the time of scoring it."
+msgstr ""
+
+#: ckanext/qa/tasks.py:360
+#, python-format
+msgid "Cache filepath does not exist: \"%s\"."
+msgstr ""
+
+#: ckanext/qa/tasks.py:368
+#, python-format
+msgid ""
+"Content of file appeared to be format \"%s\" which receives openness score: "
+"%s."
+msgstr ""
+
+#: ckanext/qa/tasks.py:372
+msgid "The format of the file was not recognized from its contents."
+msgstr ""
+
+#: ckanext/qa/tasks.py:377
+msgid "File was not downloaded deliberately"
+msgstr ""
+
+#: ckanext/qa/tasks.py:378 ckanext/qa/tasks.py:383
+msgid "Using other methods to determine file openness."
+msgstr ""
+
+#: ckanext/qa/tasks.py:382
+msgid "A system error occurred during downloading this file"
+msgstr ""
+
+#: ckanext/qa/tasks.py:403
+msgid "Could not determine a file extension in the URL."
+msgstr ""
+
+#: ckanext/qa/tasks.py:410
+#, python-format
+msgid "URL extension \"%s\" relates to format \"%s\" and receives score: %s."
+msgstr ""
+
+#: ckanext/qa/tasks.py:414
+#, python-format
+msgid ""
+"URL extension \"%s\" relates to format \"%s\" but a score for that format is "
+"not configured, so giving it default score %s."
+msgstr ""
+
+#: ckanext/qa/tasks.py:418
+#, python-format
+msgid "URL extension \"%s\" is an unknown format."
+msgstr ""
+
+#: ckanext/qa/tasks.py:455
+msgid "Format field is blank."
+msgstr ""
+
+#: ckanext/qa/tasks.py:460
+#, python-format
+msgid "Format field \"%s\" does not correspond to a known format."
+msgstr ""
+
+#: ckanext/qa/tasks.py:463
+#, python-format
+msgid "Format field \"%s\" receives score: %s."
+msgstr ""
+
+#: ckanext/qa/templates/package/read.html:6
+#: ckanext/qa/templates/package/read_base.html:6
+#: ckanext/qa/templates/package/resource_read.html:14
 #: ckanext/qa/templates/snippets/organization.html:9
 msgid "Openness"
 msgstr ""
 
-#: ckanext/qa/templates/qa/openness_stars.html:24
-msgid "Reason"
-msgstr ""
-
-#: ckanext/qa/templates/qa/openness_stars.html:27
-msgid "No openness information yet. Update expected soon."
+#: ckanext/qa/templates/qa/openness_stars_brief.html:23
+msgid "Checked"
 msgstr ""
 
 #: ckanext/qa/templates/qa/openness_stars_brief.html:26

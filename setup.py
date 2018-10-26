@@ -17,11 +17,20 @@ setup(
     include_package_data=True,
     zip_safe=False,
     install_requires=[
-        # Requirements defined in requirements.txt
+        'ckanext-archiver>=2.0',
+        'ckanext-report',
+        'SQLAlchemy>=0.6.6',
+        'requests',
+        'xlrd>=0.8.0',
+        'messytables>=0.8',
+        'python-magic>=0.4',
+        'progressbar',
+        'six>=1.9' # until messytables->html5lib releases https://github.com/html5lib/html5lib-python/pull/301
     ],
     tests_require=[
         'nose',
         'mock',
+        'flask'
     ],
     entry_points='''
     [paste.paster_command]
