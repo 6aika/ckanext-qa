@@ -1,14 +1,14 @@
 # Translations template for ckanext-qa.
-# Copyright (C) 2018 ORGANIZATION
+# Copyright (C) 2019 ORGANIZATION
 # This file is distributed under the same license as the ckanext-qa project.
-# FIRST AUTHOR <EMAIL@ADDRESS>, 2018.
+# FIRST AUTHOR <EMAIL@ADDRESS>, 2019.
 #
 #, fuzzy
 msgid ""
 msgstr ""
 "Project-Id-Version: ckanext-qa 2.0\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2018-10-26 06:22+0000\n"
+"POT-Creation-Date: 2019-11-29 08:10+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -185,7 +185,7 @@ msgid "Unstructured data (e.g. PDF)"
 msgstr ""
 
 #: ckanext/qa/templates/report/openness.html:3
-#: ckanext/qa/templates/report/openness.html:57
+#: ckanext/qa/templates/report/openness.html:68
 msgid "Datasets given a score"
 msgstr ""
 
@@ -194,49 +194,49 @@ msgid "Totals"
 msgstr ""
 
 #: ckanext/qa/templates/report/openness.html:8
-#: ckanext/qa/templates/report/openness.html:29
-#: ckanext/qa/templates/report/openness.html:62
+#: ckanext/qa/templates/report/openness.html:40
+#: ckanext/qa/templates/report/openness.html:73
 msgid "Score TBC"
 msgstr ""
 
 #: ckanext/qa/templates/report/openness.html:10
-#: ckanext/qa/templates/report/openness.html:31
-#: ckanext/qa/templates/report/openness.html:64
-#: ckanext/qa/templates/report/openness.html:87
+#: ckanext/qa/templates/report/openness.html:42
+#: ckanext/qa/templates/report/openness.html:75
+#: ckanext/qa/templates/report/openness.html:98
 msgid "Score"
 msgstr ""
 
-#: ckanext/qa/templates/report/openness.html:28
-#: ckanext/qa/templates/report/openness.html:85
+#: ckanext/qa/templates/report/openness.html:39
+#: ckanext/qa/templates/report/openness.html:96
 msgid "Publisher"
 msgstr ""
 
-#: ckanext/qa/templates/report/openness.html:33
-#: ckanext/qa/templates/report/openness.html:56
+#: ckanext/qa/templates/report/openness.html:44
+#: ckanext/qa/templates/report/openness.html:67
 msgid "Total stars"
 msgstr ""
 
-#: ckanext/qa/templates/report/openness.html:34
+#: ckanext/qa/templates/report/openness.html:45
 msgid "Average stars"
 msgstr ""
 
-#: ckanext/qa/templates/report/openness.html:55
+#: ckanext/qa/templates/report/openness.html:66
 msgid "Average score"
 msgstr ""
 
-#: ckanext/qa/templates/report/openness.html:58
+#: ckanext/qa/templates/report/openness.html:69
 msgid "Score frequencies"
 msgstr ""
 
-#: ckanext/qa/templates/report/openness.html:82
+#: ckanext/qa/templates/report/openness.html:93
 msgid "Dataset"
 msgstr ""
 
-#: ckanext/qa/templates/report/openness.html:83
+#: ckanext/qa/templates/report/openness.html:94
 msgid "Notes"
 msgstr ""
 
-#: ckanext/qa/templates/report/openness.html:88
+#: ckanext/qa/templates/report/openness.html:99
 msgid "Score reason"
 msgstr ""
 

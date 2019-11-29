@@ -1,21 +1,21 @@
 # Translations template for ckanext-qa.
-# Copyright (C) 2017 ORGANIZATION
+# Copyright (C) 2019 ORGANIZATION
 # This file is distributed under the same license as the ckanext-qa project.
-# FIRST AUTHOR <EMAIL@ADDRESS>, 2017.
+# FIRST AUTHOR <EMAIL@ADDRESS>, 2019.
 # 
 # Translators:
 # Mikko Nieminen <mikko.nieminen@gofore.com>, 2017
-# Joonas Dukpa, 2018
 # Hami Kekkonen <hami.kekkonen@hel.fi>, 2019
+# Joonas Dukpa, 2019
 # 
 #, fuzzy
 msgid ""
 msgstr ""
 "Project-Id-Version: ckanext-qa 2.0\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2017-04-13 12:18+0000\n"
+"POT-Creation-Date: 2019-11-29 08:10+0000\n"
 "PO-Revision-Date: 2017-04-13 12:27+0000\n"
-"Last-Translator: Hami Kekkonen <hami.kekkonen@hel.fi>, 2019\n"
+"Last-Translator: Joonas Dukpa, 2019\n"
 "Language-Team: Finnish (https://www.transifex.com/6aika-dataportal/teams/68018/fi/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -24,20 +24,157 @@ msgstr ""
 "Language: fi\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
-#: ckanext/qa/templates/qa/openness_stars.html:23
+#: ckanext/qa/reports.py:166
+msgid "Openness (Five Stars)"
+msgstr "Avoimuusaste (5-tähden asteikko)"
+
+#: ckanext/qa/reports.py:167
+msgid ""
+"Datasets graded on Tim Berners Lees' Five Stars of Openness - openly "
+"licensed, openly accessible, structured, open format, URIs for entities, "
+"linked."
+msgstr ""
+"Datat on luokiteltu Tim Berners Leen luoman 5-tähden avoimuusasteikon "
+"perusteella: avoimesti lisensoitu, avoimesti saatavilla rakenteisessa "
+"muodossa, jaettu avoimella formaatilla, tietoaineistolla on URI, johon "
+"voidaan viitata tai kaikki tietoalkiot on kytketty johonkin tietomalliin. "
+"Lisätiedot: <a href= https://5stardata.info/en/ target=_blank>5-Star Open "
+"Data</a>"
+
+#: ckanext/qa/tasks.py:253
+msgid "Could not understand the file format, therefore score is 1."
+msgstr "Formaattia ei tunnistettu, joten tulos on 1."
+
+#: ckanext/qa/tasks.py:263
+#, python-format
+msgid "Unknown error: %s"
+msgstr "Tuntematon virhe: %s"
+
+#: ckanext/qa/tasks.py:277
+msgid "License not open"
+msgstr "Lisenssi ei ole avoin."
+
+#: ckanext/qa/tasks.py:302
+msgid "File could not be downloaded."
+msgstr "Tiedostoa ei pystytty lataamaan."
+
+#: ckanext/qa/tasks.py:303 ckanext/qa/tasks.py:378 ckanext/qa/tasks.py:383
+#: ckanext/qa/templates/qa/openness_stars_brief.html:23
+msgid "Reason"
+msgstr "Syy"
+
+#: ckanext/qa/tasks.py:304
+#, python-format
+msgid "Error details: %s."
+msgstr "Virhe: %s."
+
+#: ckanext/qa/tasks.py:305
+#, python-format
+msgid "Attempted on %s."
+msgstr "Hakua yritettiin: %s."
+
+#: ckanext/qa/tasks.py:309 ckanext/qa/tasks.py:317
+#, python-format
+msgid "This URL last worked on: %s."
+msgstr "URL toimi viimeksi: %s."
+
+#: ckanext/qa/tasks.py:311
+msgid "This was the first attempt."
+msgstr "Tämä oli ensimmäinen hakuyritys."
+
+#: ckanext/qa/tasks.py:313
+#, python-format
+msgid "Tried %s times since %s."
+msgstr "Yritetty hakea %s kertaa alkaen %s."
+
+#: ckanext/qa/tasks.py:319
+msgid "This URL has not worked in the history of this tool."
+msgstr "URL ei ole toiminut tämän tarkistustyökalun käyttöaikana."
+
+#: ckanext/qa/tasks.py:355 ckanext/qa/tasks.py:386
+msgid "This file had not been downloaded at the time of scoring it."
+msgstr "Tiedostoa ei ole ladattu pisteytyshetkellä."
+
+#: ckanext/qa/tasks.py:360
+#, python-format
+msgid "Cache filepath does not exist: \"%s\"."
+msgstr "Välimuistin tiedostopolku ei ole olemassa: \"%s\"."
+
+#: ckanext/qa/tasks.py:368
+#, python-format
+msgid ""
+"Content of file appeared to be format \"%s\" which receives openness score: "
+"%s."
+msgstr ""
+"Tiedoston sisältö vaikutti olevan formaatiltaan \"%s\", joka johti "
+"avoimuuspisteisiin: %s."
+
+#: ckanext/qa/tasks.py:372
+msgid "The format of the file was not recognized from its contents."
+msgstr "Tiedoston formaattia ei tunnistettu sisällön perusteella."
+
+#: ckanext/qa/tasks.py:377
+msgid "File was not downloaded deliberately"
+msgstr "Tiedostoa ei tarkoituksella ladattu"
+
+#: ckanext/qa/tasks.py:378 ckanext/qa/tasks.py:383
+msgid "Using other methods to determine file openness."
+msgstr "Käytetty muita menetelmiä tiedoston avoimuuden tunnistamiseen."
+
+#: ckanext/qa/tasks.py:382
+msgid "A system error occurred during downloading this file"
+msgstr "Virhe ilmeni tiedoston latauksen yhteydessä"
+
+#: ckanext/qa/tasks.py:403
+msgid "Could not determine a file extension in the URL."
+msgstr "Ei voitu tunnistaa tiedostopäätettä URL:sta"
+
+#: ckanext/qa/tasks.py:410
+#, python-format
+msgid "URL extension \"%s\" relates to format \"%s\" and receives score: %s."
+msgstr "URL pääte \"%s\" viittaa formaattiin \"%s\" ja saa avoimuuspisteitä: %s."
+
+#: ckanext/qa/tasks.py:414
+#, python-format
+msgid ""
+"URL extension \"%s\" relates to format \"%s\" but a score for that format is"
+" not configured, so giving it default score %s."
+msgstr ""
+"URL pääte \"%s\" viittaa formaattiin \"%s\" mutta kyseisen formaatin "
+"pisteystä ei ole konfiguroitu, joten annettu avoimuuspisteiksi vakiopisteet:"
+" %s."
+
+#: ckanext/qa/tasks.py:418
+#, python-format
+msgid "URL extension \"%s\" is an unknown format."
+msgstr "URL pääte \"%s\" on tuntematonta formaattia."
+
+#: ckanext/qa/tasks.py:455
+msgid "Format field is blank."
+msgstr "Formaattia ei ole määritelty metatiedoissa."
+
+#: ckanext/qa/tasks.py:460
+#, python-format
+msgid "Format field \"%s\" does not correspond to a known format."
+msgstr ""
+"Metatiedoissa määritelty formaatti \"%s\" ei vastaa mitään tunnettua "
+"formaattia."
+
+#: ckanext/qa/tasks.py:463
+#, python-format
+msgid "Format field \"%s\" receives score: %s."
+msgstr "Metatiedoissa määritelty formaatti \"%s\" saa avoimuuspisteitä: %s."
+
+#: ckanext/qa/templates/package/read.html:6
+#: ckanext/qa/templates/package/read_base.html:6
+#: ckanext/qa/templates/package/resource_read.html:14
 #: ckanext/qa/templates/snippets/organization.html:9
 msgid "Openness"
 msgstr "Avoimuusaste"
 
-#: ckanext/qa/templates/qa/openness_stars.html:24
-msgid "Reason"
-msgstr "Syy"
-
-#: ckanext/qa/templates/qa/openness_stars.html:27
-msgid "No openness information yet. Update expected soon."
-msgstr ""
-"Aineistolle ei ole vielä määritetty avoimuusastetta. Päivitys odotettavissa "
-"lähiaikoina."
+#: ckanext/qa/templates/qa/openness_stars_brief.html:23
+msgid "Checked"
+msgstr "Tarkistettu"
 
 #: ckanext/qa/templates/qa/openness_stars_brief.html:26
 msgid "No openness information yet"
@@ -68,7 +205,7 @@ msgid "Unstructured data (e.g. PDF)"
 msgstr "Strukturoimaton data (esim. PDF)"
 
 #: ckanext/qa/templates/report/openness.html:3
-#: ckanext/qa/templates/report/openness.html:57
+#: ckanext/qa/templates/report/openness.html:68
 msgid "Datasets given a score"
 msgstr "Pisteytettyjä tietoaineistoja"
 
@@ -77,48 +214,48 @@ msgid "Totals"
 msgstr "Yhteensä"
 
 #: ckanext/qa/templates/report/openness.html:8
-#: ckanext/qa/templates/report/openness.html:29
-#: ckanext/qa/templates/report/openness.html:62
+#: ckanext/qa/templates/report/openness.html:40
+#: ckanext/qa/templates/report/openness.html:73
 msgid "Score TBC"
 msgstr "Pisteet laskematta"
 
 #: ckanext/qa/templates/report/openness.html:10
-#: ckanext/qa/templates/report/openness.html:31
-#: ckanext/qa/templates/report/openness.html:64
-#: ckanext/qa/templates/report/openness.html:87
+#: ckanext/qa/templates/report/openness.html:42
+#: ckanext/qa/templates/report/openness.html:75
+#: ckanext/qa/templates/report/openness.html:98
 msgid "Score"
 msgstr "Pisteet"
 
-#: ckanext/qa/templates/report/openness.html:28
-#: ckanext/qa/templates/report/openness.html:85
+#: ckanext/qa/templates/report/openness.html:39
+#: ckanext/qa/templates/report/openness.html:96
 msgid "Publisher"
 msgstr "Organisaatio"
 
-#: ckanext/qa/templates/report/openness.html:33
-#: ckanext/qa/templates/report/openness.html:56
+#: ckanext/qa/templates/report/openness.html:44
+#: ckanext/qa/templates/report/openness.html:67
 msgid "Total stars"
 msgstr "Tähtiä yhteensä"
 
-#: ckanext/qa/templates/report/openness.html:34
+#: ckanext/qa/templates/report/openness.html:45
 msgid "Average stars"
 msgstr "Tähtien keskiarvo"
 
-#: ckanext/qa/templates/report/openness.html:55
+#: ckanext/qa/templates/report/openness.html:66
 msgid "Average score"
 msgstr "Pisteiden keskiarvo"
 
-#: ckanext/qa/templates/report/openness.html:58
+#: ckanext/qa/templates/report/openness.html:69
 msgid "Score frequencies"
 msgstr "Pistejakauma"
 
-#: ckanext/qa/templates/report/openness.html:82
+#: ckanext/qa/templates/report/openness.html:93
 msgid "Dataset"
 msgstr "Tietoaineisto"
 
-#: ckanext/qa/templates/report/openness.html:83
+#: ckanext/qa/templates/report/openness.html:94
 msgid "Notes"
 msgstr "Huomiot"
 
-#: ckanext/qa/templates/report/openness.html:88
+#: ckanext/qa/templates/report/openness.html:99
 msgid "Score reason"
 msgstr "Pisteytyksen selite"
