@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: ckanext-qa 2.0\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2019-11-29 13:40+0000\n"
+"POT-Creation-Date: 2019-12-12 10:07+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -16,17 +16,6 @@ msgstr ""
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Generated-By: Babel 2.3.4\n"
-
-#: ckanext/qa/reports.py:166
-msgid "Openness (Five Stars)"
-msgstr ""
-
-#: ckanext/qa/reports.py:167
-msgid ""
-"Datasets graded on Tim Berners Lees' Five Stars of Openness - openly "
-"licensed, openly accessible, structured, open format, URIs for entities, "
-"linked."
-msgstr ""
 
 #: ckanext/qa/tasks.py:253
 msgid "Could not understand the file format, therefore score is 1."

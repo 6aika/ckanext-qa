@@ -11,7 +11,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: ckanext-qa 2.0\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2019-11-29 08:10+0000\n"
+"POT-Creation-Date: 2019-12-12 10:07+0000\n"
 "PO-Revision-Date: 2017-04-13 12:27+0000\n"
 "Last-Translator: Joonas Dukpa, 2018\n"
 "Language-Team: Swedish (https://www.transifex.com/6aika-dataportal/teams/68018/sv/)\n"
@@ -21,17 +21,6 @@ msgstr ""
 "Generated-By: Babel 2.3.4\n"
 "Language: sv\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
-
-#: ckanext/qa/reports.py:166
-msgid "Openness (Five Stars)"
-msgstr ""
-
-#: ckanext/qa/reports.py:167
-msgid ""
-"Datasets graded on Tim Berners Lees' Five Stars of Openness - openly "
-"licensed, openly accessible, structured, open format, URIs for entities, "
-"linked."
-msgstr ""
 
 #: ckanext/qa/tasks.py:253
 msgid "Could not understand the file format, therefore score is 1."
