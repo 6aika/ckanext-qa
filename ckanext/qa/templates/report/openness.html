@@ -15,7 +15,7 @@
           <tr>
             <td>{{ c.data['total_score_counts'].get('null', 0) }}</td>
             {% for n in range(6) %}
-              <th>{{ c.data['total_score_counts'].get(n|string, 0) }}</th>
+              <td>{{ c.data['total_score_counts'].get(n|string, 0) }}</td>
             {% endfor %}
           </tr>
         </tbody>
