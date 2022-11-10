@@ -2,12 +2,13 @@ import logging
 
 import ckan.model as model
 import ckan.plugins as p
+from ckan.plugins import toolkit
 
 from ckanext.archiver.interfaces import IPipe
-from logic import action, auth
-from model import QA, aggregate_qa_for_a_dataset
-import helpers
-import lib
+from ckanext.qa.logic import action, auth
+from ckanext.qa.model import QA, aggregate_qa_for_a_dataset
+from ckanext.qa.helpers import qa_openness_stars_resource_html, qa_openness_stars_dataset_html
+from ckanext.qa.lib import create_qa_update_package_task
 from ckanext.report.interfaces import IReport
 from ckan.lib.plugins import DefaultTranslation
 
@@ -15,9 +16,14 @@ from ckan.lib.plugins import DefaultTranslation
 log = logging.getLogger(__name__)
 
 
-class QAPlugin(p.SingletonPlugin, p.toolkit.DefaultDatasetForm, DefaultTranslation):
+if toolkit.check_ckan_version(min_version='2.9.0'):
+    from ckanext.qa.plugin.flask_plugin import MixinPlugin
+else:
+    from ckanext.qa.plugin.pylons_plugin import MixinPlugin
+
+
+class QAPlugin(MixinPlugin, p.SingletonPlugin, p.toolkit.DefaultDatasetForm, DefaultTranslation):
     p.implements(p.IConfigurer, inherit=True)
-    p.implements(p.IRoutes, inherit=True)
     p.implements(IPipe, inherit=True)
     p.implements(IReport)
     p.implements(p.IActions)
@@ -30,18 +36,7 @@ class QAPlugin(p.SingletonPlugin, p.toolkit.DefaultDatasetForm, DefaultTranslati
     # IConfigurer
 
     def update_config(self, config):
-        p.toolkit.add_template_directory(config, 'templates')
-
-    # IRoutes
-
-    def before_map(self, map):
-        # Link checker - deprecated
-        res = 'ckanext.qa.controllers:LinkCheckerController'
-        map.connect('qa_resource_checklink', '/qa/link_checker',
-                    conditions=dict(method=['GET']),
-                    controller=res,
-                    action='check_link')
-        return map
+        toolkit.add_template_directory(config, '../templates')
 
     # IPipe
 
@@ -55,7 +50,7 @@ class QAPlugin(p.SingletonPlugin, p.toolkit.DefaultDatasetForm, DefaultTranslati
         dataset = model.Package.get(dataset_id)
         assert dataset
 
-        lib.create_qa_update_package_task(dataset, queue=queue)
+        create_qa_update_package_task(dataset, queue=queue)
 
     # IReport
 
@@ -85,9 +80,9 @@ class QAPlugin(p.SingletonPlugin, p.toolkit.DefaultDatasetForm, DefaultTranslati
     def get_helpers(self):
         return {
             'qa_openness_stars_resource_html':
-            helpers.qa_openness_stars_resource_html,
+            qa_openness_stars_resource_html,
             'qa_openness_stars_dataset_html':
-            helpers.qa_openness_stars_dataset_html,
+            qa_openness_stars_dataset_html,
             }
 
     # IPackageController
