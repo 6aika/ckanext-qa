@@ -1,4 +1,5 @@
 import logging
+import os
 
 import ckan.model as model
 import ckan.plugins as p
@@ -11,7 +12,7 @@ from ckanext.qa.helpers import qa_openness_stars_resource_html, qa_openness_star
 from ckanext.qa.lib import create_qa_update_package_task
 from ckanext.report.interfaces import IReport
 from ckan.lib.plugins import DefaultTranslation
-
+import ckanext.qa
 
 log = logging.getLogger(__name__)
 
@@ -110,3 +111,11 @@ class QAPlugin(MixinPlugin, p.SingletonPlugin, p.toolkit.DefaultDatasetForm, Def
                 del qa_dict['package_id']
                 del qa_dict['resource_id']
                 res['qa'] = qa_dict
+
+    # ITranslation
+    def i18n_directory(self):
+        u'''Change the directory of the .mo translation files'''
+        return os.path.join(
+            os.path.dirname(ckanext.qa.__file__),
+            'i18n'
+        )
