@@ -128,7 +128,7 @@ msgstr ""
 #: ckanext/qa/tasks.py:418
 #, python-format
 msgid "URL extension \"%s\" is an unknown format."
-msgstr "URL pääte \"%s\" on tuntematonta formaattia."
+msgstr "URL:n pääte \"%s\" on tuntematonta formaattia."
 
 #: ckanext/qa/tasks.py:455
 msgid "Format field is blank."
