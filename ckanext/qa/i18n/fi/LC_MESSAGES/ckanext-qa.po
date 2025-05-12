@@ -122,9 +122,8 @@ msgid ""
 "URL extension \"%s\" relates to format \"%s\" but a score for that format is"
 " not configured, so giving it default score %s."
 msgstr ""
-"URL pääte \"%s\" viittaa formaattiin \"%s\" mutta kyseisen formaatin "
-"pisteystä ei ole konfiguroitu, joten annettu avoimuuspisteiksi vakiopisteet:"
-" %s."
+"URL:n pääte \"%s\" viittaa formaattiin \"%s\". Kyseisen formaatin pisteystä "
+"ei ole konfiguroitu, joten annettu avoimuuspisteiksi vakiopisteet: %s."
 
 #: ckanext/qa/tasks.py:418
 #, python-format
