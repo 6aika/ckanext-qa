@@ -4,9 +4,8 @@
 # FIRST AUTHOR <EMAIL@ADDRESS>, 2019.
 # 
 # Translators:
-# Mikko Nieminen <mikko.nieminen@gofore.com>, 2017
-# Hami Kekkonen <hami.kekkonen@hel.fi>, 2019
-# Joonas Dukpa, 2019
+# Zharktas <jari-pekka.voutilainen@gofore.com>, 2025
+# Hami Kekkonen <hami.kekkonen@hel.fi>, 2025
 # 
 #, fuzzy
 msgid ""
@@ -14,9 +13,9 @@ msgstr ""
 "Project-Id-Version: ckanext-qa 2.0\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
 "POT-Creation-Date: 2019-12-12 10:07+0000\n"
-"PO-Revision-Date: 2017-04-13 12:27+0000\n"
-"Last-Translator: Joonas Dukpa, 2019\n"
-"Language-Team: Finnish (https://www.transifex.com/6aika-dataportal/teams/68018/fi/)\n"
+"PO-Revision-Date: 2025-02-27 08:09+0000\n"
+"Last-Translator: Hami Kekkonen <hami.kekkonen@hel.fi>, 2025\n"
+"Language-Team: Finnish (https://app.transifex.com/6aika-dataportal/teams/68018/fi/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -68,7 +67,7 @@ msgstr "Tämä oli ensimmäinen hakuyritys."
 #: ckanext/qa/tasks.py:313
 #, python-format
 msgid "Tried %s times since %s."
-msgstr "Yritetty hakea %s kertaa alkaen %s."
+msgstr "Yritetty hakea %s kertaa %s alkaen ."
 
 #: ckanext/qa/tasks.py:319
 msgid "This URL has not worked in the history of this tool."
@@ -89,7 +88,7 @@ msgid ""
 "Content of file appeared to be format \"%s\" which receives openness score: "
 "%s."
 msgstr ""
-"Tiedoston sisältö vaikuttaa olevan formaatiltaan \"%s\", joka johti "
+"Tiedoston sisältö vaikuttaa olevan formaatiltaan \"%s\", mikä johti "
 "avoimuuspisteisiin: %s."
 
 #: ckanext/qa/tasks.py:372
@@ -115,7 +114,7 @@ msgstr "Ei voitu tunnistaa tiedostopäätettä URL:sta"
 #: ckanext/qa/tasks.py:410
 #, python-format
 msgid "URL extension \"%s\" relates to format \"%s\" and receives score: %s."
-msgstr "URL pääte \"%s\" viittaa formaattiin \"%s\" ja saa avoimuuspisteitä: %s."
+msgstr "URL pääte \"%s\" viittaa formaattiin \"%s\" ja saa avoimuuspisteitä %s."
 
 #: ckanext/qa/tasks.py:414
 #, python-format
@@ -123,14 +122,13 @@ msgid ""
 "URL extension \"%s\" relates to format \"%s\" but a score for that format is"
 " not configured, so giving it default score %s."
 msgstr ""
-"URL pääte \"%s\" viittaa formaattiin \"%s\" mutta kyseisen formaatin "
-"pisteystä ei ole konfiguroitu, joten annettu avoimuuspisteiksi vakiopisteet:"
-" %s."
+"URL:n pääte \"%s\" viittaa formaattiin \"%s\". Kyseisen formaatin pisteystä "
+"ei ole konfiguroitu, joten annettu avoimuuspisteiksi vakiopisteet: %s."
 
 #: ckanext/qa/tasks.py:418
 #, python-format
 msgid "URL extension \"%s\" is an unknown format."
-msgstr "URL pääte \"%s\" on tuntematonta formaattia."
+msgstr "URL:n pääte \"%s\" on tuntematonta formaattia."
 
 #: ckanext/qa/tasks.py:455
 msgid "Format field is blank."
@@ -146,7 +144,7 @@ msgstr ""
 #: ckanext/qa/tasks.py:463
 #, python-format
 msgid "Format field \"%s\" receives score: %s."
-msgstr "Metatiedoissa määritelty formaatti \"%s\" saa avoimuuspisteitä: %s."
+msgstr "Metatiedoissa määritelty formaatti \"%s\" saa avoimuuspisteitä %s."
 
 #: ckanext/qa/templates/package/read.html:6
 #: ckanext/qa/templates/package/read_base.html:6
@@ -233,7 +231,7 @@ msgstr "Pistejakauma"
 
 #: ckanext/qa/templates/report/openness.html:93
 msgid "Dataset"
-msgstr "Tietoaineisto"
+msgstr "Data"
 
 #: ckanext/qa/templates/report/openness.html:94
 msgid "Notes"
