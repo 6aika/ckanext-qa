@@ -114,7 +114,7 @@ msgstr "Ei voitu tunnistaa tiedostopäätettä URL:sta"
 #: ckanext/qa/tasks.py:410
 #, python-format
 msgid "URL extension \"%s\" relates to format \"%s\" and receives score: %s."
-msgstr "URL pääte \"%s\" viittaa formaattiin \"%s\" ja saa avoimuuspisteitä: %s."
+msgstr "URL pääte \"%s\" viittaa formaattiin \"%s\" ja saa avoimuuspisteitä %s."
 
 #: ckanext/qa/tasks.py:414
 #, python-format
