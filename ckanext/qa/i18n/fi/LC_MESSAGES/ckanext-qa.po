@@ -88,7 +88,7 @@ msgid ""
 "Content of file appeared to be format \"%s\" which receives openness score: "
 "%s."
 msgstr ""
-"Tiedoston sisältö vaikuttaa olevan formaatiltaan \"%s\", joka johti "
+"Tiedoston sisältö vaikuttaa olevan formaatiltaan \"%s\", mikä johti "
 "avoimuuspisteisiin: %s."
 
 #: ckanext/qa/tasks.py:372
