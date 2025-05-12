@@ -231,7 +231,7 @@ msgstr "Pistejakauma"
 
 #: ckanext/qa/templates/report/openness.html:93
 msgid "Dataset"
-msgstr "Tietoaineisto"
+msgstr "Data"
 
 #: ckanext/qa/templates/report/openness.html:94
 msgid "Notes"
