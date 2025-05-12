@@ -144,7 +144,7 @@ msgstr ""
 #: ckanext/qa/tasks.py:463
 #, python-format
 msgid "Format field \"%s\" receives score: %s."
-msgstr "Metatiedoissa määritelty formaatti \"%s\" saa avoimuuspisteitä: %s."
+msgstr "Metatiedoissa määritelty formaatti \"%s\" saa avoimuuspisteitä %s."
 
 #: ckanext/qa/templates/package/read.html:6
 #: ckanext/qa/templates/package/read_base.html:6
